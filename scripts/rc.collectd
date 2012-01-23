@@ -1,0 +1,28 @@
+#! /bin/sh
+
+# FIXME hardcoded pathes to binaries & configs
+
+case "$1" in
+
+"start") 
+echo "Starting collectd ..."
+/usr/sbin/collectd -C /home/om/om-agent/etc/collectd/collectd.conf -P /home/om/om-agent/var/run/collectd/collectd.pid
+
+;;
+
+"stop")
+echo "Stopping collectd ..."
+kill `cat /home/om/om-agent/var/run/collectd/collectd.pid`
+;;
+
+"restart")
+$0 stop 
+$0 start
+;;
+
+"status")
+echo "Not yet..."
+;;
+
+esac
+
