@@ -1,3 +1,0 @@
-pay_parship_log_severity debug:GAUGE:0:65535, info:GAUGE:0:65535, warn:GAUGE:0:65535, error:GAUGE:0:65535, fatal:GAUGE:0:65535      
-app_parship_log_severity debug:GAUGE:0:65535, info:GAUGE:0:65535, warn:GAUGE:0:65535, error:GAUGE:0:65535, fatal:GAUGE:0:65535      
-mgmt_parship_log_severity debug:GAUGE:0:65535, info:GAUGE:0:65535, warn:GAUGE:0:65535, error:GAUGE:0:65535, fatal:GAUGE:0:65535      
