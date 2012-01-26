@@ -20,7 +20,10 @@ then
 fi
 
 # read in environment
-source "${SELF_LOCATION}/../om-agent.env"
+if ! . "${SELF_LOCATION}/../om-agent.env" ; then
+	echo "ERROR couldn't read environment"
+	exit 42
+fi
 
 case "$1" in
 
