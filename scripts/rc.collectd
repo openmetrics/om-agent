@@ -26,12 +26,12 @@ case "$1" in
 
 	"start") 
 		echo "Starting collectd ..."
-		/usr/sbin/collectd -C $OM_AGENT_DIR/om-agent/etc/collectd/collectd.conf -P $OM_AGENT_DIR/om-agent/var/run/collectd/collectd.pid
+		/usr/sbin/collectd -C $OM_AGENT_DIR/etc/collectd/collectd.conf -P $OM_AGENT_DIR/var/run/collectd/collectd.pid
 	;;
 
 	"stop")
 		echo "Stopping collectd ..."
-		kill `cat $OM_AGENT_DIR/om-agent/var/run/collectd/collectd.pid`
+		kill `cat $OM_AGENT_DIR/var/run/collectd/collectd.pid`
 	;;
 
 	"restart")
