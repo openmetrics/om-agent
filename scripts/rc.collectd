@@ -1,28 +1,48 @@
-#! /bin/sh
+#!/bin/sh
 
-# FIXME hardcoded pathes to binaries & configs
+# find our location
+SELF_LOCATION=$(cd "$(dirname "$0")" ; pwd)
+
+# was this invoked as a link ?
+if [ -L "$0" ]
+then
+	LINKTO=$(/usr/bin/readlink "$0")
+
+	# Is the link a relative path
+	if [[ "${LINKTO}" = /* ]]
+	then
+	    # absolute path so just invoke it
+		exec "${LINKTO}" "$@"
+	else
+	    # invoke by prepending our folder
+		exec "${SELF_LOCATION}/${LINKTO}" "$@"
+	fi
+fi
+
+# read in environment
+source "${SELF_LOCATION}/om-agent.env"
 
 case "$1" in
 
-"start") 
-echo "Starting collectd ..."
-/usr/sbin/collectd -C /home/om/om-agent/etc/collectd/collectd.conf -P /home/om/om-agent/var/run/collectd/collectd.pid
+	"start") 
+		echo "Starting collectd ..."
+		/usr/sbin/collectd -C $OM_AGENT_DIR/om-agent/etc/collectd/collectd.conf -P $OM_AGENT_DIR/om-agent/var/run/collectd/collectd.pid
+	;;
 
-;;
+	"stop")
+		echo "Stopping collectd ..."
+		kill `cat $OM_AGENT_DIR/om-agent/var/run/collectd/collectd.pid`
+	;;
 
-"stop")
-echo "Stopping collectd ..."
-kill `cat /home/om/om-agent/var/run/collectd/collectd.pid`
-;;
+	"restart")
+		$0 stop 
+		$0 start
+	;;
 
-"restart")
-$0 stop 
-$0 start
-;;
-
-"status")
-echo "Not yet..."
-;;
+	"status")
+		echo "Not yet..."
+		exit 42
+	;;
 
 esac
 
