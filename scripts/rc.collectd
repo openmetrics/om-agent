@@ -20,7 +20,7 @@ then
 fi
 
 # read in environment
-source "${SELF_LOCATION}/om-agent.env"
+source "${SELF_LOCATION}/../om-agent.env"
 
 case "$1" in
 
